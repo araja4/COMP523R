@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Student Submission form
+        //button(type='button', onclick="alert('Hello world!')") Click Me!
+    form.form-horizontal(method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+
+        .form-group
+            label(class='col-sm-2 control-label', for='numStudents') Group Size
+            .col-sm-8
+                input.form-control(type='text', name='numStudents', id='numStudents', placeholder='Enter the number of students', autofocus=true)
+        .form-group
+            label(class='col-sm-2 control-label', for='student1') Student 1 Name
+            .col-sm-8
+                input.form-control(type='text', name='student1', id='student1', placeholder='Name', autofocus=true)
+
+        .form-group
+            label(class='col-sm-2 control-label', for='student2') Student 2 Name
+            .col-sm-8
+                input.form-control(type='text', name='student2', id='student2', placeholder='Name', autofocus=true)
+
+        .form-group
+            label(class='col-sm-2 control-label', for='student3') Student 3 Name
+            .col-sm-8
+                input.form-control(type='text', name='student3', id='student3', placeholder='Name', autofocus=true)
+
+        .form-group
+            label(class='col-sm-2 control-label', for='student4') Student 4 Name
+            .col-sm-8
+                input.form-control(type='text', name='student4', id='student4', placeholder='Name', autofocus=true)
+
+        .form-group
+            label(class='col-sm-2 control-label', for='preferenceList') Project Preferences (decreasing order)
+            .col-sm-8
+                input.form-control(type='text', name='preferenceList', id='preferenceList', placeholder='separate all 12 project preference letters by a comma without any spaces i.e. a,b,c,d,e,f,g,h,i,j,k,l')
+
+        .form-group
+            .col-sm-offset-2.col-sm-8
+                button.btn.btn-primary(type='submit')
+                    i.fa.fa-envelope
+                    | Send

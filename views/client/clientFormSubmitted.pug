@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Project Proposal Submitted
+
+        .panel.panel-default
+            .panel-heading
+                h4
+                .p.card-text
+                |  #{project}
+            .li.list-group-item
+                strong Name:
+                .p.card-text
+                |  #{name}
+            .li.list-group-item
+                strong Email:
+                .p.card-text
+                |  #{email}
+            .li.list-group-item
+                strong Organization:
+                .p.card-text
+                |  #{organization}
+            .li.list-group-item
+                strong Description:
+                .p.card-text
+                |  #{description}
+            .li.list-group-item
+                a(href=presentation) Project Presentation / Website URL
+            .li.list-group-item
+                strong Submitted For Term:
+                |  #{term}
+
+    a.btn.btn-default(href='/', role='button') Return to home page »

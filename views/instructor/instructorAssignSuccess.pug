@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    #breadcrumb
+    script.
+        $('#breadcrumb').append(createBreadcrumb());
+    .page-header
+        h3 Success!
+
+    h4 Messages:
+    if messages.length > 0
+        each message in messages
+            p= message
+    else
+        p There are no messages to view, which means everything succeeded!
+
+    p
+        a.btn.btn-default(href='/instructor/client-chosen-times', role='button') Return to Client Times

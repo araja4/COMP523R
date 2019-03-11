@@ -1,0 +1,29 @@
+extends ../layout
+block extraHeader
+    script(src='/js/email.js')
+
+block content
+    #breadcrumb
+    .page-header
+        h4 Testing Results:
+    if credential
+        .panel.panel-default
+            .panel-heading
+                h4
+                .p.card-text
+                |  #{credential.emailAddress}
+            .li.list-group-item
+                strong Client ID:
+                .p.card-text
+                |  #{credential.clientID}
+            .li.list-group-item
+                strong Client Secret:
+                .p.card-text
+                |  #{credential.clientSecret}
+            .li.list-group-item
+                strong Refresh Token:
+                .p.card-text
+                |  #{credential.refreshToken}
+    p These credentials gave the following message when tested:
+    p
+        | #{testingResult}

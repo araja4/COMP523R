@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    #breadcrumb
+    script.
+        $('#breadcrumb').append(createBreadcrumb());
+    .page-header
+        h3 Success!
+
+    h4 Input times:
+    if times
+        for time in times
+            p=time

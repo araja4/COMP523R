@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Student Submitted Teams
+    if studentTeams
+        each team in studentTeams
+            hr
+            .row
+                p Group Size: #{team.numStudents}
+                p Group Members: #{team.student1}, #{team.student2}, #{team.student3}, #{team.student4}
+                p Project Preferences: #{team.preferenceList}
+
+
+    hr
+    .row
+        h4 Click here to generate final teams
+        a.btn.btn-default(href='/instructor/generate-final-teams', role='button')  Generate Final Teams»
+    hr

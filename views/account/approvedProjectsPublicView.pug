@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+    #breadcrumb
+    .page-header
+        h4 Approved Client Projects:
+    if clients
+        each client in clients
+            .panel.panel-default
+                .panel-heading
+                    h4
+                    .p.card-text
+                    |  #{client.project}
+                .li.list-group-item
+                    strong Name:
+                    .p.card-text
+                    |  #{client.name}
+                .li.list-group-item
+                    strong Email:
+                    .p.card-text
+                    |  #{client.email}
+                .li.list-group-item
+                    strong Organization:
+                    .p.card-text
+                    |  #{client.organization}
+                .li.list-group-item
+                    strong Description:
+                    .p.card-text
+                    |  #{client.description}
+                .li.list-group-item
+                    a(href=client.presentation) Project Presentation / Website URL
+                .li.list-group-item
+                    strong Submitted For Term:
+                    |  #{client.term}
+    script
+        | $('#breadcrumb').append(createBreadcrumb());

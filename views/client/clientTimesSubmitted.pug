@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Thank you!
+
+    h4 Your preferred presentation times have been successfully saved!
+    h4 Shortly after the due date has passed, you will receive an email notifying you of your actual presentation time.
+    hr
+    p Your selected times are:
+    each time in times
+        p= time

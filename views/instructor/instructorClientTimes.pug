@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+    #breadcrumb
+    script.
+        $('#breadcrumb').append(createBreadcrumb());
+    .page-header
+        h3 Client Time Preferences
+
+    h4 Below are all approved clients who have chosen their preferred times to propose their projects to the class.
+    h4 You can view all times below, and you can also generate finalized schedules by the clicking the button "Generate final schedules".
+    hr
+    p
+        a.btn.btn-default(href='/instructor/assign-success', role='button') Generate final schedules
+    if clients
+        each client in clients
+            .panel.panel-default
+                .panel-heading
+                    h4.p.card-text #{client.name}: #{client.presentationTime}
+                .li.list-group-item
+                    strong Project name:
+                    .p.card-text
+                    |  #{client.project}
+                .li.list-group-item
+                    strong Email:
+                    .p.card-text
+                    |  #{client.email}
+                .li.list-group-item
+                    strong Selected Times:
+                    .p.card-text
+                    |  #{client.selectedTimes}
+                .li.list-group-item
+                    strong Special Note:
+                    .p.card-text
+                    |  #{client.presentationNote}
+    p
+        a.btn.btn-default(href='/instructor/assign-success', role='button') Generate final schedules

@@ -1,0 +1,112 @@
+extends ../layout
+
+block extraHeader
+    style.
+        .incomplete {
+            color: red;
+        }
+
+        hr.divider {
+            border: 1px solid lightgrey;
+        }
+
+block content
+    h1 Instructor Dashboard
+    p.lead Manage new client requests, create student teams, and manage student teams
+    hr
+
+    // Alerts the instructor if more than one schedule is active in the database
+    if current.length > 0
+        if current.length > 1
+            .alert.alert-danger
+                | More than one schedule is active!
+                |
+                a.alert-link(href='#', data-toggle='modal', data-target='#scheduleModal') Click here to fix.
+        else
+            h4.text-center Active client schedule: #{current[0].name}
+            p.text-center
+                a(href='#', data-toggle='modal', data-target='#scheduleModal') Change
+    else
+        .alert.alert-danger
+            | You do not have an active schedule!
+            |
+            a.alert-link(href='#', data-toggle='modal', data-target='#scheduleModal') Click here to fix.
+
+    .row
+            h2 Manage Client Requests
+            p(style='white-space:pre;')
+                //if pendingClientRequests
+                | You have
+                strong  #{pendingClientRequests}
+                |  pending client requests
+                | You have
+                strong  #{approvedClientRequests}
+                |  approved client requests
+                | You have
+                strong  #{rejectedClientRequests}
+                |  rejected client requests
+                | You have
+                strong  #{deletedClientRequests}
+                |  deleted client requests
+            p
+                a.btn.btn-default(href='/instructor/client-proposals', role='button') View details »
+                a.btn.btn-default(href='/approved', role='button', target='_blank') Open Public Approved View »
+    hr.divider
+    .row
+        h2 Manage Client Emails
+        p Send emails to approved, pending, or rejected clients. Keep track of what emails have been sent.
+        p
+            a.btn.btn-default(href='/instructor/email-clients', role='button') Send/Manage Emails »
+            a.btn.btn-default(href='/instructor/email-authentication', role='button') Submit Google OAuth2 Credentials »
+            a.btn.btn-default(href='/instructor/test-authentication', role='button') Test current OAuth2 credentials »
+    hr.divider
+    .row
+        h2 Manage email templates
+        p Click here to create or modify pre-made email templates
+        p
+            a.btn.btn-default(href='/instructor/add-template', role='button') Add a template »
+            a.btn.btn-default(href='/instructor/modify-templates', role='button') Modify/Delete templates »
+    hr.divider
+    .row
+        h2 Manage Client Presentations
+        p See when clients want to present, and generate a final schedule
+        p
+            a.btn.btn-default(href='/instructor/client-chosen-times', role='button') View details »
+            a.btn.btn-default(href='/client/client-times', role='button', target='_blank') Client's Presentation Time Selection »
+    hr.divider
+    .row
+        h2 Student Team Management
+        p Click here to view student submitted teams, finalize student teams and assign teams to accepted clients
+        p
+            a.btn.btn-default(href='/instructor/view-student-submitted-teams', role='button') View details »
+    hr.divider
+    .row
+        h2.incomplete Manage Student Milestones
+        p View and track student-submitted milestones. Not implemented.
+        p
+            a.btn.btn-default(href='#', role='button') View details »
+    hr.divider
+
+    // Modal for choosing new schedule
+    #scheduleModal.modal.fade(role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal') &times;
+                    h2.modal-title Choose a Schedule to Make Active
+                .modal-body
+                    form(method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                            if schedules.length > 0
+                                each x in schedules
+                                    input(type='radio', name='chosenschedule', value=x.name)
+                                    | #{x.name}
+                                    p
+                                .form-group
+                                    button.btn.btn-primary(type='submit') Set as active
+                            else
+                                p No schedules to show
+                    p
+                        strong Make a new schedule or modifying your existing one:
+                        a.btn.btn-primary(href='/instructor/schedule-edit', role='button') Make/Modify Schedule

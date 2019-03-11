@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Team Mapping To Projects
+    if finalMapping
+        each mapping in finalMapping
+            .row
+                p #{mapping}

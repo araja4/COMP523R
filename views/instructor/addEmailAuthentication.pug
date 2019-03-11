@@ -1,0 +1,35 @@
+extends ../layout
+block extraHeader
+  script(src='/js/email.js')
+
+block content
+  #breadcrumb
+  .page-header
+    h3 Submit email authentication
+    br
+    a(href="https://medium.com/@pandeysoni/nodemailer-service-in-node-js-using-smtp-and-xoauth2-7c638a39a37e#2e53", target='_blank') Guide to Google OAuth2
+    p Please input the following Google OAuth2 email credentials:
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label(class='col-sm-2 control-label', for='emailAddress') Email Address (gmail_user)
+      .col-sm-8
+        input.form-control(type='text', name='emailAddress', id='emailAddress', placeholder='email', autofocus=true)
+    .form-group
+      label(class='col-sm-2 control-label', for='clientID') Client ID
+      .col-sm-8
+        input.form-control(type='text', name='clientID', id='clientID', placeholder='clientID')
+    .form-group
+      label(class='col-sm-2 control-label', for='clientSecret') Client Secret
+      .col-sm-8
+        input.form-control(type='text', name='clientSecret', id='clientSecret', placeholder='clientSecret')
+    .form-group
+      label(class='col-sm-2 control-label', for='refreshToken') Refresh Token
+      .col-sm-8
+        input.form-control(type='refreshToken', name='refreshToken', id='refreshToken', placeholder='refreshToken')
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-envelope
+          | Send

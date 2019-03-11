@@ -1,0 +1,29 @@
+extends ../layout
+block extraHeader
+    script(src='/js/email.js')
+
+block content
+    #breadcrumb
+    .page-header
+        h4 Modify Templates:
+    if templates
+        each template in templates
+            form(method='POST')
+                .panel.panel-default
+                    .panel-heading
+                        h4 #{template.description}
+                    .li.list-group-item
+                        strong Subject:
+                        input.form-control(type='text', name='subject', id='subject', value= template.subject)
+                    .li.list-group-item
+                        strong Email:
+                        textarea.form-control(name='body', id='body', rows='10')= template.body
+                    .panel-footer
+                        .row
+                            input(type='hidden', name='_csrf', value=_csrf)
+                            input(type='hidden', name='templateID', value= template._id)
+                            input(type='hidden', name='description', value= template.description)
+                            .col-xs-6
+                                    button.btn.btn-success.btn-sm.pull-left(type='submit', name="modify_button", value='Update') Update Template
+                            .col-xs-6
+                                    button.btn.btn-danger.btn-sm.pull-right(type='submit', name="modify_button", value='Delete') Delete Template

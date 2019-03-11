@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+    #breadcrumb
+    script.
+        $('#breadcrumb').append(createBreadcrumb());
+    .page-header
+        h3 Schedule Change/Edit
+
+    h4 Here you can edit the existing schedule or create a new one.
+    h4 To create a new schedule, type the new name in the box and fill in your new times.
+    h4 To update the current schedule, simply edit the times while keeping the name the same.
+    hr
+
+    form.form-horizontal(method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+            label(class='col-sm-2 control-label', for='name') Name of Schedule
+            .col-sm-8
+                input.form-control(type='text', name='name', id='name', value=name)
+        p.text-center *Times should be separated with a newline
+        .form-group
+            label(class='col-sm-2 control-label', for='times') Times
+            .col-sm-8
+                textarea.form-control(name='times', id='times', rows=8)
+                    | #{schedule}
+        .form-group
+            label(class='col-sm-2 control-label', for='active') Make Active?
+            .col-sm-8
+                select.form-control(name='active', id='active')
+                    option Yes
+                    option No
+        .form-group
+            .col-sm-offset-2.col-sm-8
+                button.btn.btn-primary(type='submit') Save

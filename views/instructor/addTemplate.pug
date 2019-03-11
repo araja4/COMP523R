@@ -1,0 +1,30 @@
+extends ../layout
+block extraHeader
+  script(src='/js/email.js')
+
+block content
+  #breadcrumb
+  .page-header
+    h3 Add email template
+    br
+    p Note: You will not be able to edit this information once you hit Submit, so please double check all of the information entered.
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label(class='col-sm-2 control-label', for='description') Description
+      .col-sm-8
+        input.form-control(type='text', name='description', id='description', placeholder='description', autofocus=true)
+    .form-group
+      label(class='col-sm-2 control-label', for='subject') Subject
+      .col-sm-8
+        input.form-control(type='text', name='subject', id='subject', placeholder='subject')
+    .form-group
+      label(class='col-sm-2 control-label', for='body') Message Body
+      .col-sm-8
+        textarea.form-control(name='body', id='body', placeholder='Please provide the message body of the email', rows='10')
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-envelope
+          | Send

@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    .page-header
+        h3 Generated Teams of 4
+    if generatedTeams
+        each team in generatedTeams
+            hr
+            .row
+                p Team #{team.teamNumber}
+                p Group Size: #{team.numStudents}
+                p Group Members: #{team.student1}, #{team.student2}, #{team.student3}, #{team.student4}
+                p Project Preferences: #{team.preferenceList}
+    hr
+    if unassigned_student_names
+        h4 Unassigned student are:
+        each name in unassigned_student_names
+            p #{name}
+
+    hr
+    .row
+        if canGenerateMapping == true
+            h4 Click here to compute team mapping to accepted clients
+            a.btn.btn-default(href='/instructor/compute-team-mapping-to-projects', role='button')  Compute Mapping»
+        else
+            h4 Currently have #{numOfGeneratedTeams} teams. Need exactly #{numNeededTeams} teams to generating project to team mapping
+    hr
+
+

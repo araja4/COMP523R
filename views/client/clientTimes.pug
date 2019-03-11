@@ -1,0 +1,53 @@
+extends ../layout
+
+block extraHeader
+    script(src='/js/times.js')
+
+block content
+    #message
+    .page-header
+        h3 Presentation Times
+
+    h4 Select your preferred time slots below.
+    h4 Each presentation slot is 5 minutes long.
+    hr
+    form.form-horizontal.text-center(method='POST', id='timeform')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+            label(class='col-sm-2 control-label', for='name') Select your name:
+            .col-sm-8
+                select.form-control(name='name', id='name')
+                    each client in clients
+                        option= client.name
+        p
+        .form-group(name='select-form', id='select-form')
+            .form-inline
+                .form-group.col-sm-4
+                    .row
+                        select.form-control(multiple='', name='available[]', id='available')
+                            each time in timelist
+                                option= time
+                    .row
+                        label(class='control-label', for='available') Available times
+                .form-group.col-sm-4
+                    .btn-group-vertical
+                            button.btn.btn-default.btn-sm#add-times-button
+                                | Add >>
+                            button.btn.btn-default.btn-sm#remove-times-button
+                                | << Remove
+
+                .form-group.col-sm-4
+                    .row
+                        select.form-control(multiple='', name='added[]', id='added')
+                            option Chosen times will show up here...
+                    .row
+                        label(class='control-label', for='added') Selected times
+        p
+        .form-group
+            label(class='col-sm-2 control-label', for='note') Special notes:
+            .col-sm-8
+                textarea.form-control(name='note', id='note')
+        .form-group
+            .col-sm-12
+                button.btn.btn-primary(type='submit')
+                    | Submit
